@@ -49,6 +49,7 @@ function onConnectedHandler(addr, port) {
   console.log(`* Connected to ${addr}:${port}`);
 }
 
+//@Todo use some local db instead of inmemory
 const chatMsgs = [];
 
 app.get("/about", (req, res) => {
@@ -59,8 +60,17 @@ app.get("/about", (req, res) => {
   });
 });
 
+//@Todo send this over websocket instead of polling api
+//so its faster
 app.get("/msgs", (req, res) => {
   res.json(chatMsgs);
 });
+
+//@Todo
+//      show total viewers
+//      show total followers etc. maybe latest follower
+//      incoming raid
+//      multistreaming support
+//      multisource chat (youtube, twitch, facebook)
 
 app.listen(9001);
