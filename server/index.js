@@ -60,7 +60,7 @@ app.get("/about", (req, res) => {
   res.json({
     twitterHandle: "HelloKashif",
     today: "Startup Coding (Mono FM): Pricing Simulator",
-    website: "mono.fm",
+    website: "https://mono.fm",
   });
 });
 

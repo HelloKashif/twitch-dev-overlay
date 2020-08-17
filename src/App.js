@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 const TwitterHandle = ({ twitterHandle }) => (
-  <span className="flex items-center justify-center text-white text-xl">
+  <span className="flex font-medium items-center justify-center text-white text-xl">
     <svg
       className="h-5 w-5 fill-current mr-2"
       style={{ color: "#00acee" }}
@@ -25,10 +25,10 @@ const TwitterHandle = ({ twitterHandle }) => (
 );
 
 const TodaysTitle = ({ title }) => (
-  <span className="font-mono text-xl text-white text-right">{title}</span>
+  <span className="text-xl font-medium text-white text-right">{title}</span>
 );
 const WebLink = ({ link }) => (
-  <span className="font-mono text-xl text-white text-right">
+  <span className="text-xl font-medium text-white text-right">
     Website: {link}
   </span>
 );
@@ -48,26 +48,24 @@ const ChatBox = () => {
     setInterval(run, 5000);
   }, []);
 
-  return (
+  return showChat ? (
     <div
-      className="overflow-hidden border rounded border-gray-100"
+      className="antialiased overflow-hidden border rounded border-gray-100"
       style={{ width: "350px", height: "300px" }}
     >
-      {showChat && (
-        <ul className="pb-2 h-full overflow-y-auto">
-          {msgs.map((m, i) => (
-            <li
-              key={i}
-              className="flex items-center bg-gray-800 px-2 mb-1 rounded-sm py-1 text-sm leading-5 text-white text-left"
-            >
-              <strong className="w-24 overflow-hidden">{m.username}:</strong>
-              <span className="flex-1 ml-1">{m.msg}</span>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul className="pb-2 h-full overflow-y-auto">
+        {msgs.map((m, i) => (
+          <li
+            key={i}
+            className="flex items-center bg-gray-800 px-2 mb-1 rounded-sm py-1 text-sm leading-5 text-white text-left"
+          >
+            <strong className="w-24 overflow-hidden">{m.username}:</strong>
+            <span className="flex-1 ml-1">{m.msg}</span>
+          </li>
+        ))}
+      </ul>
     </div>
-  );
+  ) : null;
 };
 
 function App() {
