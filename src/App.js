@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 
 const TwitterHandle = ({ twitterHandle }) => (
-  <span className="flex items-center justify-center text-white text-base font-mono">
+  <span className="flex items-center justify-center text-white text-xl">
     <svg
       className="h-5 w-5 fill-current mr-2"
       style={{ color: "#00acee" }}
@@ -25,22 +25,24 @@ const TwitterHandle = ({ twitterHandle }) => (
 );
 
 const TodaysTitle = ({ title }) => (
-  <span className="font-mono text-lg text-white text-right">{title}</span>
+  <span className="font-mono text-xl text-white text-right">{title}</span>
 );
 const WebLink = ({ link }) => (
-  <span className="font-mono text-lg text-white text-right">
+  <span className="font-mono text-xl text-white text-right">
     Website: {link}
   </span>
 );
 
 const ChatBox = () => {
   const [msgs, setMsgs] = React.useState([]);
+  const [showChat, setShowChat] = React.useState(true);
   React.useEffect(() => {
     const run = async () => {
       console.log("Fetching latest msgs");
       const resp = await fetch("http://localhost:9001/msgs");
       const json = await resp.json();
-      setMsgs(json);
+      setMsgs(json.msgs);
+      setShowChat(json.showChat);
     };
     run();
     setInterval(run, 5000);
@@ -48,21 +50,22 @@ const ChatBox = () => {
 
   return (
     <div
-      className="bg-gray-900 shadow rounded-t overflow-hidden"
-      style={{ width: "350px" }}
+      className="overflow-hidden border rounded border-gray-100"
+      style={{ width: "350px", height: "300px" }}
     >
-      <div className="bg-gray-700 text-white uppercase text-sm font-medium tracking-wide px-2 py-1">
-        <h2>Chat</h2>
-      </div>
-      <div className="px-2" style={{ height: "300px" }}>
-        <ul className="py-2 h-full overflow-y-auto">
+      {showChat && (
+        <ul className="pb-2 h-full overflow-y-auto">
           {msgs.map((m, i) => (
-            <li key={i} className="py-1 text-sm leading-5 text-white text-left">
-              {m.username} - {m.msg}
+            <li
+              key={i}
+              className="flex items-center bg-gray-800 px-2 mb-1 rounded-sm py-1 text-sm leading-5 text-white text-left"
+            >
+              <strong className="w-24 overflow-hidden">{m.username}:</strong>
+              <span className="flex-1 ml-1">{m.msg}</span>
             </li>
           ))}
         </ul>
-      </div>
+      )}
     </div>
   );
 };

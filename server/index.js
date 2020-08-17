@@ -50,12 +50,16 @@ function onConnectedHandler(addr, port) {
 }
 
 //@Todo use some local db instead of inmemory
-const chatMsgs = [];
+let chatMsgs = [];
+
+// setInterval(() => {
+//   chatMsgs = chatMsgs.slice(1);
+// }, 5000);
 
 app.get("/about", (req, res) => {
   res.json({
     twitterHandle: "HelloKashif",
-    today: "Coding our stream overlay in JS: Chill Stream",
+    today: "Startup Coding (Mono FM): Pricing Simulator",
     website: "mono.fm",
   });
 });
@@ -63,7 +67,10 @@ app.get("/about", (req, res) => {
 //@Todo send this over websocket instead of polling api
 //so its faster
 app.get("/msgs", (req, res) => {
-  res.json(chatMsgs);
+  res.json({
+    showChat: true,
+    msgs: chatMsgs,
+  });
 });
 
 //@Todo
