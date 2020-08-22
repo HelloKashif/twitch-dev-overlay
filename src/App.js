@@ -70,9 +70,9 @@ const ChatBox = () => {
 
 function App() {
   const [about, setAbout] = React.useState({
-    twitterHandle: "",
+    twitterHandle: "HelloKashif",
     today: "",
-    website: "",
+    website: "https://mono.fm",
   });
   React.useEffect(() => {
     fetch("http://localhost:9001/about")
@@ -83,18 +83,20 @@ function App() {
   }, []);
   return (
     <div className="App relative flex flex-col justify-between h-screen">
-      <div className="absolute bottom-0 left-0 mb-10">
+      <div className="hidden absolute bottom-0 left-0 mb-10">
         <ChatBox />
       </div>
-      <header className="w-screen border-b-2 border-teal-200 flex items-center bg-gray-900 h-8 px-2">
+      <header className="hidden w-screen border-b-2 border-teal-200 flex items-center bg-gray-900 h-8 px-2">
         <div className="flex items-center justify-between w-full">
-          <TwitterHandle twitterHandle={about.twitterHandle} />
           <TodaysTitle title={about.today} />
         </div>
       </header>
       <div></div>
       <footer className="px-2 border-t-2 border-teal-200 w-screen bg-gray-900 h-10 text-white flex items-center justify-between">
-        <WebLink link={about.website} />
+        <div className="flex items-center space-x-12">
+          <TwitterHandle twitterHandle={about.twitterHandle} />
+          <WebLink link={about.website} />
+        </div>
       </footer>
     </div>
   );

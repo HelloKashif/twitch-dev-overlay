@@ -59,7 +59,7 @@ let chatMsgs = [];
 app.get("/about", (req, res) => {
   res.json({
     twitterHandle: "HelloKashif",
-    today: "Startup Coding (Mono FM): Pricing Simulator",
+    today: "Building a Startup (Mono FM): Bug Fixes, Logo etc.",
     website: "https://mono.fm",
   });
 });
@@ -68,7 +68,7 @@ app.get("/about", (req, res) => {
 //so its faster
 app.get("/msgs", (req, res) => {
   res.json({
-    showChat: true,
+    showChat: false,
     msgs: chatMsgs,
   });
 });
